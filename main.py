@@ -45,8 +45,8 @@ onboard_LED = Pin(48, Pin.OUT)
 #Adds _# to end of filename, is same file name is used more than once images are stacked in the same file and only the first image renders while the size grows
 fm = FileManager()
 
-cam = Camera(spi, cs, debug_information=True)
-cam.resolution = '320X240'
+cam = Camera(spi, cs, debug_text_enabled=True)
+cam.resolution = '320x240'
 #cam.resolution = '640x480'
 # cam.set_filter(cam.SPECIAL_REVERSE)
 cam.set_brightness_level(cam.BRIGHTNESS_PLUS_4)
@@ -57,7 +57,7 @@ onboard_LED.on()
 cam.capture_jpg()
 sleep_ms(50)
 #cam.saveJPG('image.jpg') #fixed name
-cam.saveJPG(fm.new_jpg_fn('image')) #updating name
+cam.save_jpg(fm.new_jpg_filename('image')) #updating name
 onboard_LED.off()
 
 
