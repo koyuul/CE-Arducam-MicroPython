@@ -23,8 +23,16 @@ SCK - GP12 - white
 MISO - RX - GP13 - brown
 MOSI - TX - GP11 - yellow
 CS - GP17 - orange
-'''
 
+Camera pin - ESP32S (NodeMCU)
+VCC - 3V3 - red
+GND - GND - black
+SPI - VSPI - 2
+SCK - GP18 - white
+MISO - RX - GP19 - brown
+MOSI - TX - GP23 - yellow
+CS - GP15 - orange
+'''
 
 ################################################################## CODE ACTUAL ##################################################################
 #Pi pico
@@ -35,14 +43,24 @@ cs = Pin(17, Pin.OUT)
 # button = Pin(15, Pin.IN,Pin.PULL_UP)
 onboard_LED = Pin(25, Pin.OUT)
 '''
+
 #ESP 32 S3
+'''
 spi = SPI(2,sck=Pin(12), miso=Pin(13), mosi=Pin(11), baudrate=8000000)
 cs = Pin(17, Pin.OUT)
 
 # button = Pin(15, Pin.IN,Pin.PULL_UP)
 onboard_LED = Pin(48, Pin.OUT)
+'''
 
-#Adds _# to end of filename, is same file name is used more than once images are stacked in the same file and only the first image renders while the size grows
+#ESP 32S (NodeMCU)
+spi = SPI(2, baudrate=800000, polarity=0, phase=0, bits=8, firstbit=0, sck=Pin(18), mosi=Pin(23), miso=Pin(19))
+cs = Pin(16, Pin.OUT)
+
+# button = Pin(15, Pin.IN,Pin.PULL_UP)
+onboard_LED = Pin(2,  Pin.OUT)
+
+#Adds _# to end of filename, is samjpge file name is used more than once images are stacked in the same file and only the first image renders while the size grows
 fm = FileManager()
 
 cam = Camera(spi, cs, debug_text_enabled=True)
@@ -68,3 +86,4 @@ Benchmarks
 - Increased speed (8000000), cam.resolution = '640X480', no burst read (camera pointed at roof) ==== TIME: ~7.3 seconds
 
 '''
+
